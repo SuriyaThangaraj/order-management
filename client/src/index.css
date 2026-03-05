@@ -1,0 +1,532 @@
+:root {
+  --primary: #FF0000;
+  --primary-hover: #CC0000;
+  --bg-dark: #0a0a0a;
+  --card-bg: rgba(30, 30, 30, 0.8);
+  --text-white: #ffffff;
+  --text-grey: #b0b0b0;
+  --border-radius: 12px;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --hover-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+  --font-family: 'Inter', sans-serif;
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* html block removed to return control to body */
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Background Watermark */
+/* Global Background Image (User Uploaded) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Use the uploaded food image */
+  background-image: url('/background.jpg');
+
+  /* Scale to cover the entire screen, no repeating */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Increased opacity for better visibility */
+  opacity: 0.8;
+
+  pointer-events: none;
+  z-index: 0;
+  /* Layer 0: Above body background */
+  transition: opacity 0.3s ease;
+}
+
+/* Ensure content is above watermark */
+#root {
+  position: relative;
+  z-index: 1;
+  /* Layer 1: Content above image */
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Utilities */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn-outline {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.card {
+  background: rgba(30, 30, 30, var(--card-opacity, 0.8));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  border-color: var(--primary);
+  box-shadow: var(--hover-shadow);
+}
+
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--text-grey);
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--text-white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  border-left: 5px solid var(--primary);
+  padding-left: 15px;
+}
+
+/* Animations */
+@keyframes blink {
+  0% {
+    opacity: 1;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+.blink-red {
+  animation: blink 1.5s infinite;
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .page-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  /* Responsive Grid Defaults */
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stacked buttons and headers */
+  .mobile-stack {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 15px !important;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --border-radius: 8px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Tesla Spotify Card Theme*/
+/* Global Styles */
+
+/* Global Styles */
+
+/* Consolidated Global Styles */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
+
+  /* Global Background Image */
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Background Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* shorthand for top/right/bottom/left: 0 */
+  background: rgba(0, 0, 0, 0.4);
+  /* Dark overlay for readability */
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.tesla-split-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  flex-direction: row;
+  background: url('/background.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark Overlay */
+.tesla-split-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 12, 12, 0.5);
+  z-index: 2;
+}
+
+/* LEFT PANEL: Transparent Branding */
+.tesla-left-panel {
+  flex: 5;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.tesla-brand-content {
+  text-align: center;
+}
+
+.tesla-left-panel h1 {
+  font-size: 56px;
+  /* Larger Bold Text */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 10px 0 0 0;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
+  max-width: 85%;
+  line-height: 1.1;
+  /* Bouncy Transition */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  /* Negative Mask Effect */
+}
+
+.tesla-left-panel h1:hover {
+  transform: scale(1.05) translateY(-5px);
+  text-shadow: 0 20px 40px rgba(0, 0, 0, 1);
+  letter-spacing: 3px;
+  color: #ffffff;
+}
+
+.tesla-logo-large {
+  width: 250px;
+  /* Increased Logo Size More */
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+  margin-bottom: 20px;
+}
+
+/* RIGHT PANEL: Transparent Wrapper */
+.tesla-right-panel {
+  flex: 4;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+/* LOGIN BOX: Spotify Style Black Card */
+.tesla-login-box {
+  width: 100%;
+  max-width: 450px;
+  background-color: #000000;
+  /* Pure Black */
+  border: 1px solid #333;
+  /* Subtle border */
+  border-radius: 40px;
+  /* Heavy rounding */
+  padding: 50px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+}
+
+.tesla-welcome-header {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.tesla-welcome-header h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.tesla-welcome-header p {
+  color: #b3b3b3;
+  font-size: 16px;
+  font-weight: 400;
+  display: block;
+}
+
+.tesla-input-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tesla-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.tesla-input {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  border: 1px solid #555;
+  border-radius: 50px;
+  /* Pill Shape */
+  background-color: #121212;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.tesla-input:focus {
+  outline: none;
+  border-color: #ffffff;
+  background-color: #121212;
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+.tesla-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #E82127;
+  /* Tesla Red */
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  /* Pill Shape */
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 25px;
+}
+
+.tesla-btn:hover {
+  transform: scale(1.02);
+  background-color: #cc0000;
+}
+
+.tesla-footer-link {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #b3b3b3;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tesla-footer-link a {
+  color: #ffffff;
+  margin-left: 5px;
+  text-decoration: underline;
+}
+
+
+.tesla-footer-link a:hover {
+  text-decoration: none;
+  color: #E82127;
+}
+
+/* --- Mobile Responsiveness for Auth Pages --- */
+@media (max-width: 900px) {
+  .tesla-split-container {
+    flex-direction: column;
+  }
+
+  /* Hide the large branding text/image panel on mobile to focus on login */
+  .tesla-left-panel {
+    display: none;
+    flex: 0;
+  }
+
+  .tesla-right-panel {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    /* Add some contrast against the background image */
+  }
+
+  .tesla-login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .tesla-welcome-header h2 {
+    font-size: 24px;
+  }
+
+  /* Reduce overlay opacity slightly on mobile so background image is visible but text is readable */
+  .tesla-split-container::before {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}

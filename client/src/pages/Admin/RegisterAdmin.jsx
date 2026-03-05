@@ -42,7 +42,7 @@ const RegisterAdmin = () => {
         // Initialize Google Sign-In for Signup
         if (window.google) {
             window.google.accounts.id.initialize({
-                client_id: "998701360087-guniljpa4v3fqkhj3hrrn05aapvid1gdf.apps.googleusercontent.com",
+                client_id: "998701360087-guniljpa4v3fqkhj3hrm05aapvid1gdf.apps.googleusercontent.com",
                 callback: handleGoogleResponse
             });
 

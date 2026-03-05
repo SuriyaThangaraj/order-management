@@ -38,7 +38,7 @@ const AdminLogin = () => {
         // Initialize Google Sign-In
         if (window.google) {
             window.google.accounts.id.initialize({
-                client_id: "998701360087-3ub0elge3fqav65d8uptb8erdvkasrqu.apps.googleusercontent.com",
+                client_id: "998701360087-guniljpa4v3fqkhj3hrrn05aapvid1gdf.apps.googleusercontent.com",
                 callback: handleGoogleResponse
             });
 

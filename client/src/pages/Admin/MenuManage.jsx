@@ -191,7 +191,7 @@ const MenuManage = () => {
                     <div key={item._id} className="card" style={{ padding: '0', overflow: 'hidden', opacity: item.isAvailable ? 1 : 0.6 }}>
                         <div style={{ height: '150px', background: '#eee', position: 'relative' }}>
                             <img
-                                src={`${import.meta.env.VITE_API_URL.replace('/api', '')}${item.imageUrl}`}
+                                src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${item.imageUrl}`}
                                 alt={item.name}
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                 onError={(e) => { e.target.src = 'https://via.placeholder.com/300?text=No+Image' }}
